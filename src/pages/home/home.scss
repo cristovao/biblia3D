@@ -1,0 +1,73 @@
+page-home {
+
+  .logo__imagem{
+    background:  #4d7498; 
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .icone-microfone {
+  animation: blinker 1s linear infinite;
+}
+
+  @keyframes blinker {
+    50% { opacity: 0; }
+  }
+
+ 
+  .color{
+    color: #1c496a;
+  }
+
+  .scroll-content{
+        padding: 0px;
+  }
+
+
+  ion-spinner * {
+    margin-top: -50px;
+      margin-left: 20px;
+      width: 28px;
+      height: 300%;
+      stroke: #444;
+      fill: #222;
+    }
+
+    .item-conversa {
+      padding-bottom: 5%;
+      margin-bottom: 5% !important;
+      border-bottom: 1px solid #ccc;
+      
+    }
+
+    .reticencias{
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    
+
+  
+    .message-input .item-inner {
+      border-bottom: 1px solid #1c496a !important;
+    }
+
+    .msj:before{
+        width: 0;
+        height: 0;
+        content:"";
+        top:-5px;
+        left:-14px;
+        position:relative;
+        border-style: solid;
+        border-width: 0 13px 13px 0;
+        border-color: transparent #ffffff transparent transparent;            
+    }
+    .balao-enviado{
+      background: #e1eaf2;
+      text-align-last: right;
+      padding: 6px;
+    }
+}

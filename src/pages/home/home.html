@@ -1,0 +1,64 @@
+<ion-header >
+  <ion-navbar color="primary">
+    <ion-title style="background: #4d7498">
+
+      <img class="logo__imagem" (click)="iniciar()" style="height:100%" src="assets/img/logo.png"/>
+      <div style="margin-left: 30%">Biblia 3D</div>
+    </ion-title>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background: #f7f7f7">
+
+  <ion-list  style="margin-bottom:20% ; margin-top: 5%" no-lines>
+      <ion-item floating [id]="c.idScroll" style="background: #f7f7f7" *ngFor="let c of listaConversa" >
+        <ion-grid style="background: white">
+          
+          <ion-row justify-content-start *ngIf="!c.id" style="background: white">
+            <ion-col text-wrap>
+              <p class="color">{{c.texto}}</p>
+            </ion-col>
+             
+          </ion-row>
+
+
+            <ion-row justify-content-start *ngIf="c.id" class="balao-enviado">
+            <ion-col text-wrap  >
+              <p class="color">{{c.texto}}</p>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-item>
+   
+    </ion-list>
+     <template [ngIf]="exibirSpinner" >
+      <ion-spinner name="dots"></ion-spinner>
+     </template>
+
+  <ion-grid style=" position: fixed; bottom: 0px; background: white">
+    <ion-row>
+      <ion-col col-8 text-wrap>
+        <ion-item class="message-input">
+          
+            <ion-input  type="text" placeholder="Escreva seu texto aqui" id="texto" name="texto" [(ngModel)]="texto" required></ion-input>
+           
+          </ion-item>
+        </ion-col>
+
+        
+        <ion-col col-4 text-wrap style="margin-top: 4%;">
+          
+          <div style="padding: 0 15px; display: inline" (click)="enviar()">
+              <ion-icon class="color" name="send" style="font-size: 30px"  > </ion-icon>
+          </div><div style="padding: 0 15px;  display: inline" (click)="startListening()"  >
+              <ion-icon class="color" id="microfone" style="font-size: 30px"  name="mic">
+              </ion-icon>
+          </div>
+        </ion-col>
+    </ion-row>  
+  </ion-grid>
+
+
+</ion-content>
