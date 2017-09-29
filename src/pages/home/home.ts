@@ -49,7 +49,7 @@ export class HomePage {
   @ViewChild(Content) cont: Content;
 
  
-
+  abrirGif: boolean = false;
   id: any = 0;
   element: any;
   context: any;
@@ -182,6 +182,8 @@ export class HomePage {
     this.conversaObj = new Conversa;
    this.cont.scrollToBottom()
     this.conversasionService.enviar(this.texto, this.context).subscribe(data => {
+      this.abrirGif = true;
+      setTimeout(() => this.abrirGif = false, 5000);
       this.tts.speak({locale: 'pt-BR', rate: 1, text: data.output.text})
       console.log(data)
         this.conversa.push(data.output.text);
