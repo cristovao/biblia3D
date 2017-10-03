@@ -61,7 +61,7 @@ export class HomePage {
   listaConversa: Conversa[] = new Array<Conversa>();
   complemento: string;
   exibirSpinner: boolean = false;
-
+  mostrarRodape: boolean = true;
 
 
 
@@ -78,10 +78,10 @@ export class HomePage {
       this.conversaObj.id=false;
       this.conversaObj.possibilidades = <Array<string>> data.context.possibilidades;
       this.conversaObj.texto = data.output.text;
-      this.abrirGif = true;
-      this.tts.speak({locale: 'pt-BR', rate: 0.9, text: data.output.text}).then(() =>{
-       this.fecharGif();
-      })
+      // this.abrirGif = true;
+      // this.tts.speak({locale: 'pt-BR', rate: 0.9, text: data.output.text}).then(() =>{
+      //  this.fecharGif();
+      // })
       this.listaConversa.push(this.conversaObj);
       this.conversaObj = new Conversa;
       this.conversa.push(data.output.text);
@@ -337,6 +337,7 @@ fecharGif(){
   }
  
   startListening() {
+    this.mostrarRodape = false;
      this.speechRecognition.hasPermission()
       .then((hasPermission: boolean) => {
         if (!hasPermission) {

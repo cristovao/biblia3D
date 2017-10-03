@@ -9,16 +9,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content *ngIf="!abrirGif" >
+<ion-content *ngIf="!abrirGif" style="background-color: #252525;" >
 <div style="height:130px">
-  <img  (click)="startListening()"  style="height:130%; margin-top: 60%; position: relative;margin-left: 50%;transform: translateX(-50%);" center src="assets/img/micro.png"/>
+  <img  (click)="startListening()"  style="height:130%; margin-top: 60%; position: relative;margin-left: 50%;transform: translateX(-50%);" center src="assets/img/nizo_rm.gif"/>
 </div>
   
+
+
+
+<ion-footer *ngIf="mostrarRodape">
+    <ion-card>
+    <ion-card-header style="text-align: center;">
+    Pergunte sobre o Rei Davi
+  </ion-card-header>
+  </ion-card>
+</ion-footer>
 
 
 </ion-content>
 <ion-content *ngIf="abrirGif" style="background-color: black;">
   <div >
-    <img  src="assets/img/watson.gif" style="margin-top: 36%; position: relative;margin-left: 50%;transform: translateX(-50%);"/>
+    <img  src="assets/img/giphy.gif" style="margin-top: 36%; position: relative;margin-left: 50%;transform: translateX(-50%);"/>
   </div>
 </ion-content>
