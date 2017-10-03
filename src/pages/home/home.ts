@@ -78,7 +78,10 @@ export class HomePage {
       this.conversaObj.id=false;
       this.conversaObj.possibilidades = <Array<string>> data.context.possibilidades;
       this.conversaObj.texto = data.output.text;
-      this.tts.speak({locale: 'pt-BR', rate: 1, text: data.output.text})
+      this.abrirGif = true;
+      this.tts.speak({locale: 'pt-BR', rate: 0.9, text: data.output.text}).then(() =>{
+       this.fecharGif();
+      })
       this.listaConversa.push(this.conversaObj);
       this.conversaObj = new Conversa;
       this.conversa.push(data.output.text);
@@ -170,7 +173,10 @@ export class HomePage {
 
   }
 
-
+enviarteste(){
+  this.abrirGif = true;
+  setTimeout(() => this.fecharGif(), 5000);
+}
   enviar() {
     if(this.texto){
     this.abrirLoading();
@@ -180,11 +186,15 @@ export class HomePage {
     this.listaConversa.push(this.conversaObj);
 
     this.conversaObj = new Conversa;
-   this.cont.scrollToBottom()
+   
     this.conversasionService.enviar(this.texto, this.context).subscribe(data => {
       this.abrirGif = true;
-      setTimeout(() => this.abrirGif = false, 5000);
-      this.tts.speak({locale: 'pt-BR', rate: 1, text: data.output.text})
+      this.tts.speak({locale: 'pt-BR', rate: 0.9, text: data.output.text}).then(() =>{
+       console.log("TERMINOU")
+       this.fecharGif();
+       this.abrirLoading();
+       this.fecharLoading();
+      })
       console.log(data)
         this.conversa.push(data.output.text);
         this.conversaObj.possibilidades = <Array<string>> data.context.possibilidades;
@@ -211,30 +221,34 @@ export class HomePage {
       }
   }
 
+fecharGif(){
+  console.log("Fechar GIF")
+  this.abrirGif = false;
+}
 
-scrollTo(element) {
+// scrollTo(element) {
    
-       //let posicaoElemento = this.getPosition(elemento);
-       console.log("===========================")
-       console.log(this.continuarScrol)
+//        //let posicaoElemento = this.getPosition(elemento);
+//        console.log("===========================")
+//        console.log(this.continuarScrol)
    
-        this.continuarScrol = this.continuarScrol +100000;
-        this.exibirSpinner = false;
-        this.cont.scrollTo(0, this.continuarScrol, 3000).then(data => {
-          this.fecharLoading();
-        })
+//         this.continuarScrol = this.continuarScrol +100000;
+//         this.exibirSpinner = false;
+//         this.cont.scrollTo(0, this.continuarScrol, 3000).then(data => {
+//           this.fecharLoading();
+//         })
 
    
-  }
+//   }
 
-   esperarCarregarPage(idScroll) {
-    let elemento = document.getElementById(idScroll);
-    if (elemento) {
-      this.scrollTo(idScroll)
-    } else {
-        setTimeout(() => this.esperarCarregarPage(idScroll), 1000);
-    }
-  }
+  //  esperarCarregarPage(idScroll) {
+  //   let elemento = document.getElementById(idScroll);
+  //   if (elemento) {
+  //     this.scrollTo(idScroll)
+  //   } else {
+  //       setTimeout(() => this.esperarCarregarPage(idScroll), 1000);
+  //   }
+  // }
 
   getPosition(element) {
 
@@ -300,7 +314,6 @@ scrollTo(element) {
   */
   public fecharLoading() {
     this.loader.dismiss();
-     setTimeout(() => this.cont.scrollToBottom(), 1000);
   }
 
   
@@ -340,6 +353,6 @@ scrollTo(element) {
             this.isRecording = true;
         }
       });
-    
+    this.enviar();
   }
 }
